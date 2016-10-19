@@ -1,0 +1,20 @@
+{
+  "name": "clideck",
+  "version": "1.0.0",
+  "description": "tweetdeck-like cli twitter",
+  "main": "main.js",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "twitter": "^1.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "nodejs main.js"
+  },
+  "keywords": [
+    "twitter",
+    "cli"
+  ],
+  "author": "Kirschn",
+  "license": "MIT"
+}
