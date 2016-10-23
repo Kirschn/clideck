@@ -101,63 +101,7 @@ function init (cfgFile) {
     screen.debug("scroll right, index: " + currentScrollIndex);
   }
 
-  function newTimelineInputForm() {
-    var form = blessed.form({
-      parent: screen,
-      mouse: true,
-      keys: true,
-      vi: true,
-      left: "center",
-      top: "center",
-      width: '50%',
-      height: "50%",
-      draggable: true,
-      //height: 12,
-      style: {
-        bg: 'blue',
-        // border: {
-        //   inverse: true
-        // },
-        scrollbar: {
-          inverse: true
-        }
-      },
-      content: '',
-      label: " Add new Timeline ",
-      scrollable: true,
-      border: {
-        type: 'line',
-        left: true,
-        top: true,
-        right: true,
-        bottom: true
-      },
-      scrollbar: {
-        ch: ' '
-      }
-      //alwaysScroll: true
-    });
-    var cancel = blessed.button({
-      parent:form,
-      content: "Cancel",
-      mouse: true,
-      width: "10%",
-      height: "10%",
-      bottom: "10%",
-      right: "10%",
-      border: {
-        type: 'line',
-        left: true,
-        top: true,
-        right: true,
-        bottom: true
-      }
-    })
-    cancel.on("press", function() {
-      screen.debug("Form Cancel");
-      form.destroy();
-    })
-  }
+  
   //create bottom bar
   function createBottomBar() {
    var bar = blessed.listbar({
@@ -199,11 +143,93 @@ function init (cfgFile) {
            scrollLeft();
          }
        },
-       'New TL': function() {
-        newTimelineInputForm();
+       'New Tweet': function() {
+        newTweetForm();
        }
    }});
    screen.render();
+  }
+
+  var newTweetForm = function() {
+    var form = blessed.form({
+          parent: screen,
+          width: '50%',
+          height: 7,
+          border: {
+            type: 'line'
+          },
+          keys: true,
+          tags: true,
+          top: 'center',
+          left: 'center'
+        });
+
+    var cancel = blessed.button({
+      parent: form,
+      mouse: true,
+      keys: true,
+      shrink: true,
+      padding: {
+        left: 1,
+        right: 1
+      },
+      right: 3,
+      width: 9,
+      bottom: 0,
+      name: 'cancel',
+      content: 'cancel',
+      style: {
+        focus: {
+           bg: 'blue',
+           fg: 'white'
+        },
+        hover: {
+          bg: 'blue',
+          fg: 'white'
+        }
+      },
+      border: {
+        type: 'line'
+      }
+    });
+
+    var submit = blessed.button({
+      parent: form,
+      mouse: true,
+      keys: true,
+      shrink: true,
+      padding: {
+        left: 1,
+        right: 1
+      },
+      left: 35,
+      width: 9,
+      top: 3,
+      name: 'submit',
+      content: 'submit',
+      style: {
+        focus: {
+           bg: 'blue',
+           fg: 'white'
+        },
+        hover: {
+          bg: 'blue',
+          fg: 'white'
+        }
+      },
+      border: {
+        type: 'line'
+      }
+    });
+
+    screen.append(form);
+    submit.focus();
+    screen.render();
+
+    cancel.on('press', function() {
+      screen.remove(form);
+      screen.render();
+    });
   }
 
   function createClientFromConfig(file) {
