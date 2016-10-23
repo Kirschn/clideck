@@ -1,0 +1,19 @@
+{
+	"timelines": [
+		{
+			"width": 200,
+			"name": "test Home TL",
+			"type": "testHome",
+			"accountID": 0
+		}
+	],
+	"accounts": [
+		{
+			"userName"	: 	"kek",
+			"client_id"	: 	"",
+			"client_sec": 	"",
+			"app_id"	:	"",
+			"app_sec"	:	""
+		}
+	]
+}
